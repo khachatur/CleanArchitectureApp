@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.dark {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #bb86fc;
+  --secondary-color: #03dac6;
+  --error-color: #cf6679;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.button:hover {
+  background-color: var(--secondary-color);
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.pagination-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.pagination-button:hover {
+  background-color: var(--secondary-color);
+}
