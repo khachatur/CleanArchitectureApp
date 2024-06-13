@@ -75,6 +75,49 @@ The project follows the Clean Architecture principles to ensure separation of co
 
 Follow the steps to deploy the application to Azure App Services and Azure SQL.
 
+1. Azure App Services:
+   * Deploy the ASP.NET Core backend.
+   * Continuous deployment using GitHub Actions.     
+2. Azure SQL Database:
+   * Provision and configure the database.
+   * Migrate database schema using Entity Framework migrations.
+
+## CI/CD Pipeline
+
+Use GitHub Actions for CI/CD.
+Example workflow:
+
+```bash
+name: CI/CD Pipeline
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '5.0.x'
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish -c Release -o out
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'YOUR_APP_NAME'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: './out'
+```
+
 ## Contributing
 
 1. Fork the repository
